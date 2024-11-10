@@ -5,7 +5,7 @@ import {Post} from '../types/post';
 import {useAppDispatch, useAppSelector} from '../store';
 import {addPost, editPost} from '../store/reducers/posts';
 import Spacer from '../components/Spacer';
-import ScreenWraper from '../components/ScreenWraper';
+import ScreenWrapper from '../components/ScreenWraper';
 import Button from '../components/Button';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 
@@ -46,7 +46,7 @@ const NewPost = () => {
   };
 
   return (
-    <ScreenWraper>
+    <ScreenWrapper>
       <View style={styles.container}>
         <Spacer />
         <Text>{postData ? 'Edit Post' : 'Create New Post'}</Text>
@@ -74,7 +74,7 @@ const NewPost = () => {
           style={styles.submit}
         />
       </View>
-    </ScreenWraper>
+    </ScreenWrapper>
   );
 };
 

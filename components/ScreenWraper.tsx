@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import React, {PropsWithChildren} from 'react';
 import {useTheme} from '../hooks/useTheme';
 
-const ScreenWraper = ({children}: PropsWithChildren) => {
+const ScreenWrapper = ({children}: PropsWithChildren) => {
   const theme = useTheme();
   return (
     <View style={[styles.wrapper, {backgroundColor: theme.bg}]}>
@@ -11,7 +11,7 @@ const ScreenWraper = ({children}: PropsWithChildren) => {
   );
 };
 
-export default ScreenWraper;
+export default ScreenWrapper;
 
 const styles = StyleSheet.create({
   wrapper: {
