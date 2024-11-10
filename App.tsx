@@ -3,9 +3,7 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -26,9 +24,6 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <View style={styles.container}>
-        <Text>No</Text>
-      </View>
       <PostsScreen />
     </SafeAreaView>
   );
@@ -37,8 +32,8 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'dodgerblue',
-    height: 200,
     width: '100%',
+    height: '100%',
   },
 });
 

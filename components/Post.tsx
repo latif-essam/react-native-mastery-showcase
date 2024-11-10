@@ -1,18 +1,26 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React, {PropsWithChildren} from 'react';
 import Spacer from './Spacer';
 import {capitalizeFirstLetter} from '../utils/helpers';
+import Button from './Button';
+import {useAppDispatch} from '../store';
+import {deletePost} from '../store/reducers/posts';
+import {useNavigation} from '@react-navigation/native';
 interface PostProps {
   post: any;
 }
 const Post = ({post}: PropsWithChildren<PostProps>) => {
   //   const state = useSelector((state: RootState) => state.posts.list);
   //   console.log({state});
-  console.log({len: post.body.length});
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation().navigate;
   const handleDelete = () => {
     console.log('deleted: ', post.id);
+    dispatch(deletePost({id: post.id}));
+    console.log('done: ', post.id);
   };
   const handleEdit = () => {
+    navigation('newPost', {post});
     console.log('Edited: ', post.id);
   };
   return (
@@ -27,9 +35,9 @@ const Post = ({post}: PropsWithChildren<PostProps>) => {
       <View style={styles.badge}>
         <Text style={styles.badgeText}>{post.id && post.id}</Text>
       </View>
-      <View>
+      <View style={styles.footer}>
+        <Button type="secondary" title="Edit" onPress={handleEdit} />
         <Button title="Delete" onPress={handleDelete} />
-        <Button title="Edit" onPress={handleEdit} />
       </View>
     </View>
   );
@@ -40,7 +48,7 @@ export default Post;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 120,
+    height: 150,
     margin: 5,
     marginHorizontal: 'auto',
     backgroundColor: 'rgba(1,1,1,0.2)',
@@ -64,12 +72,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    width: 30,
-    height: 30,
-    // borderTopLeftRadius: 15,
-    borderBottomLeftRadius: 15,
-    // borderBottomRightRadius: 15,
+    width: 48,
+    height: 24,
+    borderBottomLeftRadius: 12,
     backgroundColor: 'green',
   },
-  badgeText: {color: 'white', textAlign: 'center'},
+  badgeText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 10,
+    fontWeight: '500',
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: '50%',
+    display: 'flex',
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 });

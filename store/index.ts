@@ -1,10 +1,14 @@
 import {configureStore} from '@reduxjs/toolkit';
 import posts from './reducers/posts';
+import themeSlice from './reducers/themeSlice';
+import authSlice from './reducers/authSlice';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 export const store = configureStore({
   reducer: {
     posts,
+    theme: themeSlice,
+    auth: authSlice,
   },
 });
 

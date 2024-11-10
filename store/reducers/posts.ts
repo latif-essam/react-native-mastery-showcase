@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Post} from '../../types/post';
 import {fetchPosts} from '../actions/postsActions';
-
+let postId = 101;
 interface PostsState {
   list: Post[];
   status: 'idle' | 'loading' | 'failed';
@@ -16,18 +16,21 @@ const initialState: PostsState = {
   page: 1,
   totalPages: 10,
 };
+console.log({postId});
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost: (state, action: PayloadAction<Post>) => {
-      state.list.push(action.payload);
+    addPost: (state, action: PayloadAction<Partial<Post>>) => {
+      state.list.unshift({...action.payload, id: postId} as Post);
+      postId++;
     },
     deletePost: (state, action: PayloadAction<{id: number}>) => {
       state.list = state.list.filter(p => p.id !== action.payload.id);
     },
     editPost: (state, action: PayloadAction<Partial<Post>>) => {
       const index = state.list.findIndex(p => p.id === action.payload.id);
+      console.log({index});
       if (index !== -1) {
         state.list[index] = {...state.list[index], ...action.payload};
       }
@@ -42,13 +45,19 @@ const postsSlice = createSlice({
       .addCase(
         fetchPosts.fulfilled,
         (state, action: PayloadAction<{data: Post[]; page: number}>) => {
+          const {data, page} = action.payload;
+
+          // Ensure that the posts being added are not duplicates
+          const newPosts = data.filter(
+            (post: Post) =>
+              !state.list.some(existingPost => existingPost.id === post.id),
+          );
+
+          state.list = [...state.list, ...newPosts]; // Merge old and new posts
+          state.page = page;
+          state.totalPages = state.totalPages;
           state.status = 'idle';
-          if (action.payload.page === 1) {
-            state.list = action.payload.data;
-          } else {
-            state.list = [...state.list, ...action.payload.data];
-          }
-          state.page = action.payload.page;
+          state.error = null;
         },
       )
       .addCase(fetchPosts.rejected, (state, action) => {

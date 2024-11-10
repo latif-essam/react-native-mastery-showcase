@@ -2,7 +2,6 @@ import {
   ActivityIndicator,
   Button,
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -11,6 +10,7 @@ import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../store';
 import {fetchPosts} from '../store/actions/postsActions';
 import Post from '../components/Post';
+import AddPost from '../components/AddPost';
 
 const PostsScreen = () => {
   const {error, list, status, page, totalPages} = useAppSelector(
@@ -22,16 +22,16 @@ const PostsScreen = () => {
       dispatch(fetchPosts(1));
     }
   }, []);
-  console.log({error, list, status});
 
   //   handle Infinite scroll
   const loadNextPosts = () => {
     if (status === 'loading' || page >= totalPages) {
       return;
     }
+
     dispatch(fetchPosts(page + 1));
   };
-
+  console.log({status, page, list: list[0]});
   return (
     <View style={styles.container}>
       <Text>Posts: {list.length}</Text>
@@ -53,6 +53,7 @@ const PostsScreen = () => {
         </View>
       )}
       {status === 'loading' && <ActivityIndicator size={'large'} />}
+      <AddPost />
     </View>
   );
 };
@@ -61,8 +62,8 @@ export default PostsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    height: '50%',
     width: '100%',
+    height: '100%',
     paddingHorizontal: 15,
     backgroundColor: 'grey',
   },
