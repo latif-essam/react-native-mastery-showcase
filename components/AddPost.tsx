@@ -1,15 +1,20 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '../hooks/useTheme';
 
 const AddPost = () => {
-  // navigate to new screen
   const navigation = useNavigation();
+  const theme = useTheme(); // Access the theme
+
   const handleAddPost = () => {
     navigation.navigate('NewPost');
   };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={handleAddPost}>
+    <TouchableOpacity
+      style={[styles.container, {backgroundColor: theme.primary}]} // Primary color for background
+      onPress={handleAddPost}>
       <Text style={styles.text}>+</Text>
     </TouchableOpacity>
   );
@@ -27,8 +32,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'dodgerblue',
-    borderRadius: '50%',
+    borderRadius: 25, // Circular button
     elevation: 20,
   },
   text: {

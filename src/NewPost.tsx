@@ -4,7 +4,7 @@ import TextInputField from '../components/forms/TextInputField';
 import {Post} from '../types/post';
 import {useAppDispatch, useAppSelector} from '../store';
 import Spacer from '../components/Spacer';
-import ScreenWrapper from '../components/ScreenWarper';
+import ScreenWrapper from '../components/ScreenWraper';
 import Button from '../components/Button';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {addPost, editPost} from '../store/actions/postsActions';
@@ -48,7 +48,7 @@ const NewPost = () => {
       if (postData) {
         dispatch(editPost({...postToSubmit, id: postData.id}));
       } else {
-        dispatch(addPost(postToSubmit));
+        dispatch(addPost({...postToSubmit, userId: auth?.userId}));
       }
       navigation.goBack();
     } else {
@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
   },
   submit: {
     width: '100%',
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
 });
 

@@ -1,74 +1,93 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, Text, StyleSheet} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native'; // Use React Navigation to navigate
+import {View, TextInput, Text, StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 import {useAppSelector} from '../store';
 import {login} from '../store/reducers/authSlice';
+import {useTheme} from '../hooks/useTheme';
+import {ThemePallet} from '../constants/themes';
+import Button from '../components/Button';
+import TextInputField from '../components/forms/TextInputField';
+import Spacer from '../components/Spacer';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('latif');
   const [password, setPassword] = useState('202010');
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const theme = useTheme();
+  const styles = stylesObj(theme);
 
-  // Get authentication status and error from the Redux store
   const {isAuthenticated, error} = useAppSelector(state => state.auth);
 
   const handleLogin = () => {
-    dispatch(
-      login({
-        username,
-        password,
-      }),
-    );
+    dispatch(login({username, password}));
   };
 
-  // Navigate to Home screen upon successful authentication
   if (isAuthenticated) {
-    navigation.navigate('Home'); // Assuming you have set up a Home screen in your navigation
+    navigation.navigate('Home');
   }
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
+      <TextInputField
         placeholder="Username"
         value={username}
         autoCapitalize="none"
         onChangeText={setUsername}
+        onBlur={undefined}
+        name={'Username'}
+        icon="user"
       />
-      <TextInput
-        style={styles.input}
+      <Spacer />
+      <TextInputField
         placeholder="Password"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
+        autoCapitalize="none"
+        onBlur={undefined}
+        name={'Password'}
+        icon="lock"
       />
       {error && <Text style={styles.error}>{error}</Text>}
-      <Button title="Login" onPress={handleLogin} />
+      <Spacer />
+      <Button
+        title="Login"
+        onPress={handleLogin}
+        style={{
+          backgroundColor: theme.primary,
+          width: '100%',
+          paddingVertical: 10,
+        }}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    width: '100%',
-    marginBottom: 16,
-    paddingLeft: 8,
-  },
-  error: {
-    color: 'red',
-    marginBottom: 16,
-  },
-});
+const stylesObj = (theme: ThemePallet) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 16,
+      backgroundColor: theme.bg,
+    },
+    input: {
+      height: 40,
+      borderColor: theme.border,
+      borderWidth: 1,
+      width: '100%',
+      marginBottom: 16,
+      paddingLeft: 8,
+      borderRadius: 5,
+      color: theme.text,
+    },
+    error: {
+      color: theme.error,
+      marginBottom: 16,
+    },
+  });
 
 export default LoginScreen;

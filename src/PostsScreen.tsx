@@ -1,6 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   StyleSheet,
   Text,
@@ -15,16 +15,20 @@ import TextInputField from '../components/forms/TextInputField';
 import Spacer from '../components/Spacer';
 import {deleteAllPosts} from '../store/reducers/posts';
 import {useNavigation} from '@react-navigation/native';
+import {useTheme} from '../hooks/useTheme';
+import {ThemePallet} from '../constants/themes';
+import Button from '../components/Button';
 
 const PostsScreen = () => {
   const navigation = useNavigation();
-
-  const [search, setSearch] = useState('');
+  const theme = useTheme(); // Access the theme
   const {error, list, status, page, totalPages} = useAppSelector(
     state => state.posts,
   );
+  const [search, setSearch] = useState('');
   const [filteredList, setFilteredList] = useState(list);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (!filteredList.length) {
       setFilteredList(list);
@@ -34,14 +38,10 @@ const PostsScreen = () => {
     }
   }, [dispatch, list, status]);
 
-  //   handle Infinite scroll
   const loadNextPosts = () => {
     if ((status === 'loading' || page >= totalPages) && search) {
-      console.log('not loading');
-      console.log({status, page, search: !search});
       return;
     }
-
     dispatch(fetchPosts(page + 1));
   };
 
@@ -53,31 +53,41 @@ const PostsScreen = () => {
     setFilteredList(newList);
   };
 
-  // Update filteredList only when list changes
   useEffect(() => {
     setFilteredList(list);
   }, [list]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      // eslint-disable-next-line react/no-unstable-nested-components
       headerRight: () => <Text>{list.length}</Text>,
     });
   }, [list.length, navigation]);
 
+  const styles = stylesObj(theme);
+
   return (
     <View style={styles.container}>
       <Spacer />
-      <Button onPress={() => dispatch(deleteAllPosts())} title="delete all" />
       <Spacer height={12} />
-      <TextInputField
-        name="Search"
-        onBlur={undefined}
-        onChangeText={handleSearch}
-        value={search}
-        icon="search"
-        trim={false}
-      />
+      <View style={styles.row}>
+        <View style={{width: '75%', elevation: 4}}>
+          <TextInputField
+            name="Search"
+            onBlur={undefined}
+            onChangeText={handleSearch}
+            value={search}
+            icon="search"
+            trim={false}
+          />
+        </View>
+        <View>
+          <Button
+            onPress={() => dispatch(deleteAllPosts())}
+            title="Delete All"
+            style={{backgroundColor: theme.primary, elevation: 4}}
+          />
+        </View>
+      </View>
       <Spacer height={10} />
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -88,13 +98,19 @@ const PostsScreen = () => {
         onEndReached={loadNextPosts}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
-          status === 'loading' ? <ActivityIndicator size={'large'} /> : null
+          status === 'loading' ? (
+            <ActivityIndicator size={'large'} color={theme.primary} />
+          ) : null
         }
       />
       {status === 'failed' && (
-        <View>
-          <Text>Error: {error}</Text>
-          <Button title="Retry" onPress={() => dispatch(fetchPosts(1))} />
+        <View style={styles.errorContainer}>
+          <Text style={{color: theme.error}}>Error: {error}</Text>
+          <Button
+            title="Retry"
+            onPress={() => dispatch(fetchPosts(1))}
+            style={{backgroundColor: theme.primary}}
+          />
         </View>
       )}
       <AddPost />
@@ -104,15 +120,30 @@ const PostsScreen = () => {
 
 export default PostsScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    paddingHorizontal: 15,
-    backgroundColor: 'grey',
-  },
-  list: {
-    width: '100%',
-    height: '100%',
-  },
-});
+const stylesObj = (theme: ThemePallet) =>
+  StyleSheet.create({
+    container: {
+      width: '100%',
+      height: '100%',
+      paddingHorizontal: 15,
+      paddingTop: 20,
+      backgroundColor: theme.bg,
+    },
+    list: {
+      width: '100%',
+      height: '100%',
+    },
+    errorContainer: {
+      padding: 10,
+      backgroundColor: 'white',
+      borderRadius: 5,
+      marginTop: 20,
+    },
+    row: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      columnGap: 6,
+    },
+  });

@@ -54,13 +54,13 @@ const TextInputField = ({
       {icon && name === 'password' ? (
         <Pressable onPress={() => setShown(!shown)}>
           <Icon
-            color={theme.textSecondary}
+            color={theme.primary}
             name={!shown ? 'comments' : (icon as never)}
             size={16}
           />
         </Pressable>
       ) : (
-        <Icon name={icon as never} size={16} color={theme.textSecondary} />
+        <Icon name={icon as never} size={16} color={theme.secondary} />
       )}
     </View>
   );
@@ -72,18 +72,18 @@ const stylesObj = (theme: ThemePallet) =>
   StyleSheet.create({
     container: {
       alignItems: 'center',
-      backgroundColor: theme.bg_surface,
-      borderRadius: 25,
+      borderRadius: 100,
       paddingVertical: 8,
       paddingHorizontal: 14,
-
+      backgroundColor: theme.surface,
       marginVertical: 2,
       flexDirection: 'row',
       width: '100%',
+      elevation: 2,
     },
     input: {
       fontSize: 12,
       width: '95%',
-      color: theme.textPrimary,
+      color: theme.secondary,
     },
   });

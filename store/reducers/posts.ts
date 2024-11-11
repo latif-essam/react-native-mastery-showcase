@@ -71,6 +71,7 @@ const postsSlice = createSlice({
       .addCase(addPost.fulfilled, (state, action) => {
         state.status = 'idle';
         state.error = null;
+        console.log({action: action.payload.data});
         state.list.unshift({...action.payload.data, id: postId});
         // the api always return a post id with 101
         postId++;
