@@ -43,6 +43,7 @@ const authSlice = createSlice({
         state.error = null;
       } else {
         state.error = 'Invalid username or password';
+        state.isAuthenticated = false;
       }
     },
     // Action to handle logout

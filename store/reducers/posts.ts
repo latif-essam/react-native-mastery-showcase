@@ -1,6 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Post} from '../../types/post';
-import {fetchPosts} from '../actions/postsActions';
+import {
+  fetchPosts,
+  addPost,
+  editPost,
+  deletePost,
+} from '../actions/postsActions';
 let postId = 101;
 interface PostsState {
   list: Post[];
@@ -21,19 +26,13 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost: (state, action: PayloadAction<Partial<Post>>) => {
-      state.list.unshift({...action.payload, id: postId} as Post);
-      postId++;
-    },
     deletePost: (state, action: PayloadAction<{id: number}>) => {
       state.list = state.list.filter(p => p.id !== action.payload.id);
     },
-    editPost: (state, action: PayloadAction<Partial<Post>>) => {
-      const index = state.list.findIndex(p => p.id === action.payload.id);
-      console.log({index});
-      if (index !== -1) {
-        state.list[index] = {...state.list[index], ...action.payload};
-      }
+
+    deleteAllPosts: state => {
+      state.list = [];
+      state.page = 1;
     },
   },
   extraReducers: builder => {
@@ -64,9 +63,63 @@ const postsSlice = createSlice({
         state.status = 'failed';
         state.error =
           (action.error.message as string) || 'Failed to fetch posts';
+      })
+      .addCase(addPost.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(addPost.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.error = null;
+        state.list.unshift({...action.payload.data, id: postId});
+        // the api always return a post id with 101
+        postId++;
+      })
+      .addCase(addPost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error =
+          (action.error.message as string) || 'Failed to add new post';
+      })
+      .addCase(editPost.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(
+        editPost.fulfilled,
+        (state, action: PayloadAction<{data: Partial<Post>}>) => {
+          state.status = 'idle';
+          state.error = null;
+          const index = state.list.findIndex(
+            p => p.id === action.payload.data.id,
+          );
+          console.log({index});
+          if (index !== -1) {
+            console.log({action: action.payload.data});
+            state.list[index] = {...state.list[index], ...action.payload.data};
+          }
+        },
+      )
+      .addCase(editPost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error =
+          (action.error.message as string) || 'Failed updating post';
+      })
+      .addCase(deletePost.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.error = null;
+        state.list = state.list.filter(p => p.id !== action.payload.id);
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error =
+          (action.error.message as string) || 'Failed deleting post';
       });
   },
 });
-export const {addPost, deletePost, editPost} = postsSlice.actions;
+export const {deleteAllPosts} = postsSlice.actions;
 
 export default postsSlice.reducer;

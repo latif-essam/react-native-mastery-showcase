@@ -6,7 +6,7 @@ const AddPost = () => {
   // navigate to new screen
   const navigation = useNavigation();
   const handleAddPost = () => {
-    navigation.navigate('newPost');
+    navigation.navigate('NewPost');
   };
   return (
     <TouchableOpacity style={styles.container} onPress={handleAddPost}>
@@ -20,8 +20,8 @@ export default AddPost;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 20,
-    right: 20,
+    bottom: 16,
+    right: 16,
     width: 50,
     height: 50,
     display: 'flex',
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'dodgerblue',
     borderRadius: '50%',
-    elevation: 2,
+    elevation: 20,
   },
   text: {
     fontSize: 24,

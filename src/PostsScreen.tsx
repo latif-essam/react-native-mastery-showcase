@@ -6,15 +6,19 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../store';
 import {fetchPosts} from '../store/actions/postsActions';
 import Post from '../components/Post';
 import AddPost from '../components/AddPost';
 import TextInputField from '../components/forms/TextInputField';
 import Spacer from '../components/Spacer';
+import {deleteAllPosts} from '../store/reducers/posts';
+import {useNavigation} from '@react-navigation/native';
 
 const PostsScreen = () => {
+  const navigation = useNavigation();
+
   const [search, setSearch] = useState('');
   const {error, list, status, page, totalPages} = useAppSelector(
     state => state.posts,
@@ -22,20 +26,24 @@ const PostsScreen = () => {
   const [filteredList, setFilteredList] = useState(list);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (status === 'idle') {
+    if (!filteredList.length) {
+      setFilteredList(list);
+    }
+    if (status === 'idle' && !list.length) {
       dispatch(fetchPosts(1));
     }
-  }, []);
+  }, [dispatch, list, status]);
 
   //   handle Infinite scroll
   const loadNextPosts = () => {
-    if (status === 'loading' || page >= totalPages || !search) {
+    if ((status === 'loading' || page >= totalPages) && search) {
+      console.log('not loading');
+      console.log({status, page, search: !search});
       return;
     }
 
     dispatch(fetchPosts(page + 1));
   };
-  console.log({status, page, list: list[0]});
 
   const handleSearch = (text: string) => {
     setSearch(text);
@@ -44,11 +52,23 @@ const PostsScreen = () => {
     );
     setFilteredList(newList);
   };
-  console.log({list: list.length, filteredList: filteredList.length});
+
+  // Update filteredList only when list changes
+  useEffect(() => {
+    setFilteredList(list);
+  }, [list]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // eslint-disable-next-line react/no-unstable-nested-components
+      headerRight: () => <Text>{list.length}</Text>,
+    });
+  }, [list.length, navigation]);
+
   return (
     <View style={styles.container}>
       <Spacer />
-      <Text>Posts: {list.length}</Text>
+      <Button onPress={() => dispatch(deleteAllPosts())} title="delete all" />
       <Spacer height={12} />
       <TextInputField
         name="Search"
@@ -60,6 +80,7 @@ const PostsScreen = () => {
       />
       <Spacer height={10} />
       <FlatList
+        showsVerticalScrollIndicator={false}
         style={styles.list}
         data={filteredList}
         keyExtractor={item => item.id.toString()}
@@ -67,7 +88,7 @@ const PostsScreen = () => {
         onEndReached={loadNextPosts}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
-          status === 'loading' ? <ActivityIndicator size={'small'} /> : null
+          status === 'loading' ? <ActivityIndicator size={'large'} /> : null
         }
       />
       {status === 'failed' && (
@@ -76,7 +97,6 @@ const PostsScreen = () => {
           <Button title="Retry" onPress={() => dispatch(fetchPosts(1))} />
         </View>
       )}
-      {status === 'loading' && <ActivityIndicator size={'large'} />}
       <AddPost />
     </View>
   );
