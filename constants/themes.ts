@@ -28,7 +28,7 @@ export const light: ThemePallet = {
   surface_overlay: 'rgba(0, 0, 0, 0.6)', // Dark overlay for modals
   text: '#004e89', // Main text color (dark blue for legibility)
   text_primary: '#004e89', // Main text color (dark blue for legibility)
-  text_secondary: '#004e99', // Secondary text color (slightly lighter blue)
+  text_secondary: '#6b8a9b', // Secondary text color (slightly lighter blue)
   accent: '#004e89', // Accent color (links, key actions)
   border: '#d1cfc4', // Light border color for inputs, cards, etc.
   link: '#1a659e', // Link color (secondary color)
@@ -47,7 +47,7 @@ export const dark: ThemePallet = {
   surface_overlay: 'rgba(0, 0, 0, 0.8)', // Darker overlay for modals
   text: '#e0e0e0', // Light text for readability against dark backgrounds
   text_primary: '#e0e0e0', // Primary text color (light gray for main text)
-  text_secondary: '#b0b0b0', // Secondary text color (lighter gray)
+  text_secondary: '#a0a0a0', // Secondary text color (lighter gray)
   accent: '#004e89', // Accent color remains the same (blue) for consistency
   textOnSurface: '#ffffff', // Light text on surfaces (for better contrast)
   border: '#555555', // Darker border color to blend with dark theme

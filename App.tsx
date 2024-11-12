@@ -8,7 +8,6 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useAppSelector} from './store';
-import PostsScreen from './src/PostsScreen';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,7 +23,6 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <PostsScreen />
     </SafeAreaView>
   );
 }

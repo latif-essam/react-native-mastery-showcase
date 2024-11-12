@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {addPost, editPost} from '../store/actions/postsActions';
 import Toast from 'react-native-toast-message';
+import {useTheme} from '../hooks/useTheme';
 
 type RootStackParamList = {
   PostsScreen: undefined;
@@ -16,6 +17,7 @@ type RootStackParamList = {
 };
 
 const NewPost = () => {
+  const theme = useTheme();
   const {error, status} = useAppSelector(state => state.posts);
   const route = useRoute<RouteProp<RootStackParamList, 'NewPost'>>();
   const navigation = useNavigation();
@@ -77,7 +79,9 @@ const NewPost = () => {
     <ScreenWrapper>
       <View style={styles.container}>
         <Spacer />
-        <Text>{postData ? 'Edit Post' : 'Create New Post'}</Text>
+        <Text style={{color: theme.text_primary}}>
+          {postData ? 'Edit Post' : 'Create New Post'}
+        </Text>
         <TextInputField
           name="title"
           value={post.title as string}

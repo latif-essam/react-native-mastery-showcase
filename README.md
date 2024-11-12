@@ -1,79 +1,132 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Post Manager - Technical Test
 
-# Getting Started
+## Objective:
 
-> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+This React Native app interacts with the [JSONPlaceholder API](https://jsonplaceholder.typicode.com) to display, manage, and interact with posts.
 
-## Step 1: Start the Metro Server
+### Screens and Functionality:
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+1. **Post List Screen**:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+   - Fetches and displays a list of posts.
+   - Each post shows the title and body.
+   - Includes a "View Details" button that navigates to the Post Details screen.
+   - Handles loading states and errors during fetching.
 
-```bash
-# using npm
-npm start
+2. **Add Post Screen**:
 
-# OR using Yarn
-yarn start
-```
+   - Allows the user to add a new post by filling out title and body fields.
+   - Validates inputs to ensure fields are not empty.
+   - After submission, the new post is added to the post list.
 
-## Step 2: Start your Application
+3. **Post Details Screen**:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+   - Displays full details of a selected post (title, body, and user ID).
+   - Includes "Edit" and "Delete" buttons.
+   - "Edit" button navigates to the Edit Post screen.
+   - "Delete" button removes the post from the list and navigates back to the Post List screen.
 
-### For Android
+4. **Edit Post Screen**:
+   - Pre-fills a form with the current post details.
+   - Allows the user to update the title and body fields.
+   - Validates the form and saves the changes.
 
-```bash
-# using npm
-npm run android
+### Navigation:
 
-# OR using Yarn
-yarn android
-```
+- Utilizes **React Navigation** for smooth screen transitions.
 
-### For iOS
+### State Management:
 
-```bash
-# using npm
-npm run ios
+- **Redux** is used to handle global state for managing the post list and its actions.
 
-# OR using Yarn
-yarn ios
-```
+### Styling:
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+- Ensures a responsive and consistent UI across all screens, utilizing **Styled Components** and **React Native styles**.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+---
 
-## Step 3: Modifying your App
+## Screenshots:
 
-Now that you have successfully run the app, let's modify it.
+### Table: Screenshots of the app on Honor 9 Lite and Oppo A96 and for Dark & Light Themes
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+| Screen                       | Honor 9 Lite                                               | Oppo A96                                                    |
+| ---------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------- |
+| **Welcome**                  | ![Post List on Honor 9 Lite](./assets/shots/welcome-s.jpg) | ![Post List on Oppo A96](./assets/shots/welcome.jpg)        |
+| **Login**                    | ![Post List on Honor 9 Lite](./assets/shots/login-s.jpg)   | ![Post List on Oppo A96](./assets/shots/login-l.jpg)        |
+| **Home**                     | ![Post List on Honor 9 Lite](./assets/shots/home-s.jpg)    | ![Post List on Oppo A96](./assets/shots/home-l.jpg)         |
+| **Post Details**             | ![Post List on Honor 9 Lite](./assets/shots/details.jpg)   | ![Post List on Oppo A96](./assets/shots/details-l.jpg)      |
+| **Add Post**                 | ![Add Post on Honor 9 Lite](./assets/shots/new_post-l.jpg) | ![Add Post on Oppo A96](./assets/shots/new_post.jpg)        |
+| **Edit Post**                |                                                            | ![Add Post on Honor 9 Lite](./assets/shots/update_post.jpg) |
+| **Delete Post Confirmation** |                                                            | ![Add Post on Oppo A96](./assets/shots/confirm_delete.jpg)  |
+| **Settings**                 |                                                            | ![Add Post on Oppo A96](./assets/shots/settings.jpg)        |
+| **Search**                   |                                                            | ![Add Post on Oppo A96](./assets/shots/search.jpg)          |
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Setup Instructions:
 
-## Congratulations! :tada:
+### Prerequisites:
 
-You've successfully run and modified your React Native App. :partying_face:
+Make sure you have the following software installed on your computer:
 
-### Now what?
+- **Node.js**: [Download Node.js](https://nodejs.org/)
+- **Watchman**: (macOS only) [Install Watchman](https://facebook.github.io/watchman/docs/install.html)
+- **React Native CLI Installation**: [React Native CLI Installation](https://reactnative.dev/docs/environment-setup)
+- **Android Studio or VS code** (For Android development): [Set up Android Studio](https://reactnative.dev/docs/environment-setup), or [VS Code](https://code.visualstudio.com/)
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+### Steps to Run the App:
 
-# Troubleshooting
+1. **Clone the repository**:
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+   ```bash
+   git clone https://github.com/latif-essam/rayagate_demo.git
+   cd rayagate_demo
+   ```
 
-# Learn More
+2. **Install dependencies**:
 
-To learn more about React Native, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+3. **Run the app**:
+   - For iOS:
+     ```bash
+     npx react-native run-ios
+     ```
+   - For Android:
+     ```bash
+     npx react-native run-android
+     ```
+
+### Running on Emulator:
+
+- If you don’t have an emulator setup, follow the instructions for [Setting up React Native environment](https://reactnative.dev/docs/environment-setup) to configure the simulator or use a physical device.
+
+---
+
+## Technologies Used:
+
+- **[React Native](https://reactnative.dev/)**: A framework for building cross-platform mobile applications with JavaScript and React.
+- **[React Navigation](https://reactnavigation.org/)**: A popular library for handling navigation between screens in React Native apps.
+- **[Redux](https://redux.js.org/)**: A predictable state container for JavaScript apps, used for managing the app's global state.
+- **[Axios](https://axios-http.com/)**: A promise-based HTTP client for making requests to the JSONPlaceholder API and handling responses.
+- **[React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)**: A library that provides customizable icons for React Native applications.
+
+---
+
+## Bonus Features Implemented:
+
+- **Theme Toggle**: Allows users to toggle between light and dark themes.
+- **About Screen**: Contains my contact information and personal details.
+- **Optimistic UI Updates**: Implemented for adding/editing/deleting posts.
+- **Pagination**: Posts are paginated and load more as you scroll.
+- **Search**: Users can search for posts by title.
+
+---
+
+## Conclusion:
+
+This app demonstrates my ability to handle state management, implement RESTful APIs, and create a user-friendly interface using React Native. I have also implemented additional features like a theme toggle and an About section to showcase my skills in React Native development.
+
+---
+
+**Thank you for reviewing my project. I look forward to the opportunity to work with the RayaGate team.**

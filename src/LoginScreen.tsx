@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TextInput, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {useAppSelector} from '../store';
@@ -30,6 +30,7 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Image source={require('./../assets/w-2.png')} style={styles.img} />
       <TextInputField
         placeholder="Username"
         value={username}
@@ -73,6 +74,7 @@ const stylesObj = (theme: ThemePallet) =>
       alignItems: 'center',
       padding: 16,
       backgroundColor: theme.bg,
+      position: 'relative',
     },
     input: {
       height: 40,
@@ -87,6 +89,13 @@ const stylesObj = (theme: ThemePallet) =>
     error: {
       color: theme.error,
       marginBottom: 16,
+    },
+    img: {
+      objectFit: 'cover',
+      width: '80%',
+      height: '15%',
+      position: 'absolute',
+      top: '10%',
     },
   });
 

@@ -71,12 +71,12 @@ const PostDetails = ({route}: PostDetailsProps) => {
         <Button
           title="Edit"
           onPress={handleEdit}
-          style={{backgroundColor: theme.success}}
+          style={{backgroundColor: theme.success, width: '40%'}}
         />
         <Button
           title="Delete"
           onPress={() => setIsVisible(true)}
-          style={{backgroundColor: theme.error}}
+          style={{backgroundColor: theme.error, width: '40%'}}
         />
       </View>
 
@@ -130,14 +130,14 @@ const stylesObj = (theme: ThemePallet) =>
     },
     body: {
       fontSize: 16,
-      color: theme.text_on_surface, // Use theme.text_on_surface for body text
+      color: theme.text_secondary, // Use theme.text_on_surface for body text
       textAlign: 'center',
       marginBottom: 20,
       paddingHorizontal: 10,
     },
     footer: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
       width: '100%',
       marginTop: 20,
     },
