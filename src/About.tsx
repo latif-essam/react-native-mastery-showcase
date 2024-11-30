@@ -75,14 +75,13 @@ const About = () => {
         </Text>
       </View>
 
-      {/* Enthusiasm for RayaGate */}
       <View style={styles.enthusiasm}>
         <Text
           style={[
             styles.aboutMeText,
             {textAlign: 'center', fontWeight: '600', color: theme.primary},
           ]}>
-          My Enthusiasm for RayaGate
+          My Enthusiasm for React
         </Text>
         <Text style={styles.enthusiasmText}>
           I’m excited about RayaGate’s innovative, collaborative environment and

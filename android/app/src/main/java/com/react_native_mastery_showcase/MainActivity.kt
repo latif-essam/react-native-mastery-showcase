@@ -1,5 +1,5 @@
-package com.rayagate_demo
-import android.os.Bundle
+package com.react_native_mastery_showcase
+
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -11,7 +11,7 @@ class MainActivity : ReactActivity() {
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
-  override fun getMainComponentName(): String = "rayagate_demo"
+  override fun getMainComponentName(): String = "react_native_mastery_showcase"
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
@@ -19,8 +19,4 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
-  
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(null)
-  }
 }

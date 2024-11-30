@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface rayagate_demoTests : XCTestCase
+@interface react-native-mastery-showcaseTests : XCTestCase
 
 @end
 
-@implementation rayagate_demoTests
+@implementation react-native-mastery-showcaseTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

@@ -1,10 +1,10 @@
-# React Native Post Manager - Technical Test
+# React Native Mastery Showcase
 
-## Objective:
+## Objective
 
-This React Native app interacts with the [JSONPlaceholder API](https://jsonplaceholder.typicode.com) to display, manage, and interact with posts.
+This React Native app interacts with the [JSONPlaceholder API](https://jsonplaceholder.typicode.com) to display, manage, and interact with posts, while showcasing best practices and advanced features.
 
-### Screens and Functionality:
+### Screens and Functionality
 
 1. **Post List Screen**:
 
@@ -12,12 +12,14 @@ This React Native app interacts with the [JSONPlaceholder API](https://jsonplace
    - Each post shows the title and body.
    - Includes a "View Details" button that navigates to the Post Details screen.
    - Handles loading states and errors during fetching.
+   - Supports pagination and loading more posts as you scroll.
+   - Users can search for posts by title.
 
 2. **Add Post Screen**:
 
    - Allows the user to add a new post by filling out title and body fields.
    - Validates inputs to ensure fields are not empty.
-   - After submission, the new post is added to the post list.
+   - After submission, the new post is added to the post list with optimistic UI updates.
 
 3. **Post Details Screen**:
 
@@ -27,19 +29,32 @@ This React Native app interacts with the [JSONPlaceholder API](https://jsonplace
    - "Delete" button removes the post from the list and navigates back to the Post List screen.
 
 4. **Edit Post Screen**:
+
    - Pre-fills a form with the current post details.
    - Allows the user to update the title and body fields.
-   - Validates the form and saves the changes.
+   - Validates the form and saves the changes with optimistic UI updates.
 
-### Navigation:
+5. **About Screen**:
+
+   - Contains contact information and personal details.
+   - Showcases the app developer's skills and experience.
+
+6. **Theme Toggle**:
+
+   - Allows users to toggle between light and dark themes for a personalized experience.
+
+7. **Settings Screen**:
+   - Provides options to configure app settings according to user preferences.
+
+### Navigation
 
 - Utilizes **React Navigation** for smooth screen transitions.
 
-### State Management:
+### State Management
 
 - **Redux** is used to handle global state for managing the post list and its actions.
 
-### Styling:
+### Styling
 
 - Ensures a responsive and consistent UI across all screens, utilizing **Styled Components** and **React Native styles**.
 
@@ -61,9 +76,11 @@ This React Native app interacts with the [JSONPlaceholder API](https://jsonplace
 | **Settings**                 |                                                            | ![Add Post on Oppo A96](./assets/shots/settings.jpg)        |
 | **Search**                   |                                                            | ![Add Post on Oppo A96](./assets/shots/search.jpg)          |
 
-## Setup Instructions:
+---
 
-### Prerequisites:
+## Setup Instructions
+
+### Prerequisites
 
 Make sure you have the following software installed on your computer:
 
@@ -72,13 +89,13 @@ Make sure you have the following software installed on your computer:
 - **React Native CLI Installation**: [React Native CLI Installation](https://reactnative.dev/docs/environment-setup)
 - **Android Studio or VS code** (For Android development): [Set up Android Studio](https://reactnative.dev/docs/environment-setup), or [VS Code](https://code.visualstudio.com/)
 
-### Steps to Run the App:
+### Steps to Run the App
 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/latif-essam/rayagate_demo.git
-   cd rayagate_demo
+   git clone https://github.com/latif-essam/react-native-mastery-showcase.git
+   cd react-native-mastery-showcase
    ```
 
 2. **Install dependencies**:
@@ -97,13 +114,13 @@ Make sure you have the following software installed on your computer:
      npx react-native run-android
      ```
 
-### Running on Emulator:
+### Running on Emulator
 
 - If you don’t have an emulator setup, follow the instructions for [Setting up React Native environment](https://reactnative.dev/docs/environment-setup) to configure the simulator or use a physical device.
 
 ---
 
-## Technologies Used:
+## Technologies Used
 
 - **[React Native](https://reactnative.dev/)**: A framework for building cross-platform mobile applications with JavaScript and React.
 - **[React Navigation](https://reactnavigation.org/)**: A popular library for handling navigation between screens in React Native apps.
@@ -113,20 +130,10 @@ Make sure you have the following software installed on your computer:
 
 ---
 
-## Bonus Features Implemented:
-
-- **Theme Toggle**: Allows users to toggle between light and dark themes.
-- **About Screen**: Contains my contact information and personal details.
-- **Optimistic UI Updates**: Implemented for adding/editing/deleting posts.
-- **Pagination**: Posts are paginated and load more as you scroll.
-- **Search**: Users can search for posts by title.
-
----
-
-## Conclusion:
+## Conclusion
 
 This app demonstrates my ability to handle state management, implement RESTful APIs, and create a user-friendly interface using React Native. I have also implemented additional features like a theme toggle and an About section to showcase my skills in React Native development.
 
 ---
 
-**Thank you for reviewing my project. I look forward to the opportunity to work with the RayaGate team.**
+**Thank you for reviewing my project. I hope it provides a comprehensive overview of my abilities and skills in React Native development.**

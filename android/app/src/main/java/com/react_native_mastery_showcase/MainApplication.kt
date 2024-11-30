@@ -1,4 +1,4 @@
-package com.rayagate_demo
+package com.react_native_mastery_showcase
 
 import android.app.Application
 import com.facebook.react.PackageList
