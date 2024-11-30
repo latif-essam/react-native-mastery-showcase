@@ -5,9 +5,9 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import {useTheme} from '../hooks/useTheme';
+import RotatingImage from '../components/RotatingImage';
 
 const WelcomeScreen = ({navigation}) => {
   const theme = useTheme();
@@ -23,14 +23,14 @@ const WelcomeScreen = ({navigation}) => {
 
       {/* Content */}
       <View style={styles.content}>
-        <Image
-          source={{
-            uri: 'https://rayagate.com/wp-content/uploads/2023/03/RAYAGATE-logos_white-2.png',
-          }}
-          style={[styles.logo]}
-        />
+        <RotatingImage
+          source={require('./../assets/rn_logo.png')}
+          style={styles.logo}
+        />{' '}
         <View style={styles.textContent}>
-          <Text style={[styles.title, {color: '#ccc'}]}>React Native Task</Text>
+          <Text style={[styles.title, {color: '#ccc'}]}>
+            React Native Mastery Showcase
+          </Text>
           <Text style={[styles.subtitle, {color: '#ccff'}]}>
             Dev by Latif Essam
           </Text>
@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 200,
-    height: 40,
+    height: 100,
     resizeMode: 'contain',
   },
   textContent: {
     alignItems: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
   },

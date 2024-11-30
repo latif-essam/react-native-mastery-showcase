@@ -63,7 +63,7 @@ const About = () => {
         <Text style={styles.aboutMeText}>
           As a Front-End Engineer, I strive to bring unique ideas to life using
           best practices like ATOMIC design and the latest tech tools, such as
-          React, RN, TypeScript, and Redux.
+          React, React Native, TypeScript, and Redux.
         </Text>
         <Text style={styles.aboutMeText}>
           I follow the DRY, OCP, and KISS principles to ensure my code is
@@ -81,22 +81,29 @@ const About = () => {
             styles.aboutMeText,
             {textAlign: 'center', fontWeight: '600', color: theme.primary},
           ]}>
-          My Enthusiasm for React
+          My Enthusiasm for Frontend Engineering
+        </Text>
+
+        <Text style={styles.enthusiasmText}>
+          As a passionate Frontend Engineer, I'm dedicated to creating intuitive
+          and dynamic user experiences using the latest technologies in web
+          development.
         </Text>
         <Text style={styles.enthusiasmText}>
-          I’m excited about RayaGate’s innovative, collaborative environment and
-          the opportunity to work with a talented tech team.
-        </Text>
-        <Text style={styles.enthusiasmText}>
-          As a React Native Developer, I’m eager to contribute to your projects
-          and help drive the company’s success.
+          My expertise spans across HTML, CSS, JavaScript, and modern frameworks
+          like React and Vue.js. I thrive on solving complex problems and
+          bringing designs to life with clean and efficient code.
         </Text>
         <Text style={styles.enthusiasmText}>
           Outside of coding, I stay active with running, swimming, and
           volleyball, which keeps me focused and energized.
         </Text>
-        <Text style={styles.enthusiasmText}>Thanks for consideration 😊</Text>
-        <Text style={styles.enthusiasmText}>Greetings,</Text>
+        <Text style={styles.enthusiasmText}>
+          Thank you for taking the time to learn more about my journey and
+          skills. I am excited about the potential opportunities to collaborate
+          and create amazing web and mobile experiences.
+        </Text>
+        <Text style={styles.enthusiasmText}>Best Regards,</Text>
         <Text style={styles.enthusiasmText}>Latif.</Text>
       </View>
     </ScrollView>
